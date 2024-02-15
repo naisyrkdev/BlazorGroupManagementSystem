@@ -2,6 +2,16 @@
 
 html, body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    background: rgb(12,9,66);
+    background: linear-gradient(90deg, rgba(12,9,66,1) 0%, rgba(249,5,231,1) 80%, rgba(0,212,255,1) 100%);
+}
+
+.dark-background {
+    background-color: black;
+}
+
+.grey-alpha-background {
+    background-color: rgba(224, 224, 224, 0.73);
 }
 
 h1:focus {
