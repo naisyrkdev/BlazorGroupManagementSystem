@@ -7,6 +7,7 @@ public class UserClientModel
     public string ImgPath { get; init; } = String.Empty;
     public GroupEnum Group { get; set; }
     public string City { get; set; } = String.Empty;
+    public bool IsLocked { get; set; } = false;
 }
 
 public enum GroupEnum

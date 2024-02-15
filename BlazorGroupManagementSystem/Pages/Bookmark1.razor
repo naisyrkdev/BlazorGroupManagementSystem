@@ -2,7 +2,39 @@
 @using MudBlazor
 @using BlazorGroupManagementSystem.Models
 
-<PageTitle>Bookmark1</PageTitle>
+<PageTitle>Zakladka1</PageTitle>
+<MudDropContainer T="UserClientModel" Items="_users" ItemsSelector="@((item,dropzone) => item.Group.ToString() == dropzone)" ItemDropped="ItemUpdated" Class="d-flex flex-wrap flex-grow-1">
+    <ChildContent>
+        <MudDropZone T="UserClientModel" Identifier="NoGroup" Class="rounded mud-background-gray pa-6 ma-8 flex-grow-1">
+            <MudText Typo="Typo.h6" Class="mb-4 Lighten5">No Group</MudText>
+        </MudDropZone>
+        <MudTabs Elevation="2" Rounded="true" ApplyEffectsToContainer="true" PanelClass="pa-6">
+            <MudTabPanel Text="Grupa 1">
+                <MudDropZone T="UserClientModel" Identifier="Group1" Class="rounded mud-background-gray pa-6 ma-8 flex-grow-1">
+                </MudDropZone>
+            </MudTabPanel>
+            <MudTabPanel Text="Grupa 2">
+                <MudDropZone T="UserClientModel" Identifier="Group2" Class="rounded mud-background-gray pa-6 ma-8 flex-grow-1">
+                </MudDropZone>
+            </MudTabPanel>
+            <MudTabPanel Text="Grupa 3">
+                <MudDropZone T="UserClientModel" Identifier="Group3" Class="rounded mud-background-gray pa-6 ma-8 flex-grow-1">
+                </MudDropZone>
+            </MudTabPanel>
+            <MudTabPanel Text="Grupa 4">
+                <MudDropZone T="UserClientModel" Identifier="Group4" Class="rounded mud-background-gray pa-6 ma-8 flex-grow-1">
+                </MudDropZone>
+            </MudTabPanel>
+            <MudTabPanel Text="Grupa 5">
+                <MudDropZone T="UserClientModel" Identifier="Group5" Class="rounded mud-background-gray pa-6 ma-8 flex-grow-1">
+                </MudDropZone>
+            </MudTabPanel>
+        </MudTabs>
+    </ChildContent>
+    <ItemRenderer>
+        <MudPaper Elevation="25" Class="pa-4 my-4">@context.FirstName</MudPaper>
+    </ItemRenderer>
+</MudDropContainer>
 
 <MudPaper Width="300px">
     <h1>Logi</h1>
@@ -19,10 +51,10 @@
 @code {
     private List<UserClientModel> _users = new()
     {
-        new UserClientModel(){ FirstName = "Jan Kowalski", Group = GroupEnum.NoGroup },
-        new UserClientModel(){ FirstName = "Jan Kowalski2", Group = GroupEnum.NoGroup },
-        new UserClientModel(){ FirstName = "Jan Kowalski3", Group = GroupEnum.NoGroup },
-        new UserClientModel(){ FirstName = "Jan Kowalski3", Group = GroupEnum.Group1 },
+        new UserClientModel(){ FirstName = "Adam Kowalski", Group = GroupEnum.NoGroup },
+        new UserClientModel(){ FirstName = "Piotr Pitorkowski", Group = GroupEnum.NoGroup },
+        new UserClientModel(){ FirstName = "Magda Nowakowska", Group = GroupEnum.NoGroup },
+        new UserClientModel(){ FirstName = "Jan Nowak", Group = GroupEnum.Group1 },
     };
 
     private List<GroupChangeLogClientModel> _logs = new()
