@@ -1,0 +1,54 @@
+﻿@page "/bookmark1"
+@using MudBlazor
+@using BlazorGroupManagementSystem.Models
+
+<PageTitle>Bookmark1</PageTitle>
+
+<MudPaper Width="300px">
+    <h1>Logi</h1>
+    <MudList>
+        @foreach (var log in _logs)
+        {
+            <MudListItem>
+                @log.Value
+            </MudListItem>
+        }
+    </MudList>
+</MudPaper>
+
+@code {
+    private List<UserClientModel> _users = new()
+    {
+        new UserClientModel(){ FirstName = "Jan Kowalski", Group = GroupEnum.NoGroup },
+        new UserClientModel(){ FirstName = "Jan Kowalski2", Group = GroupEnum.NoGroup },
+        new UserClientModel(){ FirstName = "Jan Kowalski3", Group = GroupEnum.NoGroup },
+        new UserClientModel(){ FirstName = "Jan Kowalski3", Group = GroupEnum.Group1 },
+    };
+
+    private List<GroupChangeLogClientModel> _logs = new()
+    {
+        new GroupChangeLogClientModel()
+        {
+            Value = "Test Value",
+            Date = DateTime.Now
+        }
+    };
+
+    private void ItemUpdated(MudItemDropInfo<UserClientModel> dropItem)
+    {
+        if (dropItem.Item == null)
+            return;
+
+        if (dropItem.Item.Group.ToString() == dropItem.DropzoneIdentifier)
+            return;
+
+        Enum.TryParse(dropItem.DropzoneIdentifier, out GroupEnum dropZoneGroupIdentifier);
+        dropItem.Item.Group = dropZoneGroupIdentifier;
+
+        _logs.Add(new GroupChangeLogClientModel()
+        {
+            Value = $"{dropItem.Item.FirstName} {dropItem.Item.LastName} has been moved to group {dropItem.DropzoneIdentifier}",
+            Date = DateTime.Now
+        });
+    }
+}
