@@ -1,78 +1,89 @@
 ﻿@page "/bookmark1"
+@page "/"
 @using MudBlazor
 @using BlazorGroupManagementSystem.Models
 
-<PageTitle>Zakladka1</PageTitle>
-<MudDropContainer T="UserClientModel" Items="_users" ItemsSelector="@((item,dropzone) => item.Group.ToString() == dropzone)" ItemDropped="ItemUpdated" Class="d-flex flex-grow-1">
-    <ChildContent>
-        <MudDropZone T="UserClientModel" Identifier="NoGroup" Class="rounded grey-alpha-background pa-6 ma-8 flex-grow-1">
-            <MudText Typo="Typo.h6" Class="mb-4 text-white">Użytkownicy</MudText>
-        </MudDropZone>
-        <MudTabs Elevation="2" Rounded="true" ApplyEffectsToContainer="true" Class="ma-8" PanelClass="grey-alpha-background w-100 h-100">
-            <MudTabPanel Text="Grupa 1">
-                <MudDropZone T="UserClientModel" Identifier="Group1" Class="w-100 h-100">
-                </MudDropZone>
-            </MudTabPanel>
-            <MudTabPanel Text="Grupa 2">
-                <MudDropZone T="UserClientModel" Identifier="Group2" Class="w-100 h-100">
-                </MudDropZone>
-            </MudTabPanel>
-            <MudTabPanel Text="Grupa 3">
-                <MudDropZone T="UserClientModel" Identifier="Group3" Class="w-100 h-100">
-                </MudDropZone>
-            </MudTabPanel>
-            <MudTabPanel Text="Grupa 4">
-                <MudDropZone T="UserClientModel" Identifier="Group4" Class="w-100 h-100">
-                </MudDropZone>
-            </MudTabPanel>
-            <MudTabPanel Text="Grupa 5">
-                <MudDropZone T="UserClientModel" Identifier="Group5" Class="w-100 h-100">
-                </MudDropZone>
-            </MudTabPanel>
-        </MudTabs>
-    </ChildContent>
-    <ItemRenderer>
-        <div class="rounded m-3 bg-white" style="max-width: 8rem;">
-            <div class="d-flex justify-content-center p-3">
-                <img class="rounded-circle mx-auto mt-4 img-fluid" src="@context.ImgPath" />
-            </div>
-            <div>
-                <p class="text-center">
-                    @context.FirstName @context.LastName
-                </p>
-                <p class="text-center">
-                    @context.Group.ToString()
-                </p>
-            </div>
-            <div class="text-white rounded-bottom p-2" style="background-color: blue; height: 2rem;">
-                <p class="text-center">
-                        @context.City
-                   </p>
+<PageTitle>Bookmark1</PageTitle>
+<div class="container">
+    <div class="row">
+        <MudDropContainer T="UserClientModel" Items="_users" ItemsSelector="@((item,dropzone) => item.Group.ToString() == dropzone)" ItemDropped="UpdateUserItems" Class="d-flex flex-grow-1 col-12">
+            <ChildContent>
+                <div class="col-12 col-lg-6 rounded grey-alpha-background pa-6 ma-4 flex-grow-1">
+                    <MudText Typo="Typo.h6" Class="mb-4 text-white">Użytkownicy</MudText>
+                    <MudDropZone AllowReorder T="UserClientModel" Identifier="NoGroup" Class="d-inline-flex flex-wrap w-100 h-100">
+                     </MudDropZone>
+                 </div>
+                 <MudTabs Elevation="1" Rounded="true" ApplyEffectsToContainer="true" Class="col-12 col-lg-6 ma-4" PanelClass="grey-alpha-background w-100 h-100">
+                     <MudTabPanel Text="Grupa 1">
+                         <MudDropZone AllowReorder T="UserClientModel" Identifier="Group1" Class="w-100 h-100 d-inline-flex flex-wrap pa-6">
+                         </MudDropZone>
+                     </MudTabPanel>
+                     <MudTabPanel Text="Grupa 2">
+                         <MudDropZone AllowReorder T="UserClientModel" Identifier="Group2" Class="w-100 h-100 d-inline-flex flex-wrap pa-6">
+                         </MudDropZone>
+                     </MudTabPanel>
+                     <MudTabPanel Text="Grupa 3">
+                         <MudDropZone AllowReorder T="UserClientModel" Identifier="Group3" Class="w-100 h-100 d-inline-flex flex-wrap pa-6">
+                         </MudDropZone>
+                     </MudTabPanel>
+                     <MudTabPanel Text="Grupa 4">
+                         <MudDropZone AllowReorder T="UserClientModel" Identifier="Group4" Class="w-100 h-100 d-inline-flex flex-wrap pa-6">
+                         </MudDropZone>
+                     </MudTabPanel>
+                     <MudTabPanel Text="Grupa 5">
+                         <MudDropZone AllowReorder T="UserClientModel" Identifier="Group5" Class="w-100 h-100 d-inline-flex flex-wrap pa-6">
+                         </MudDropZone>
+                     </MudTabPanel>
+                 </MudTabs>
+             </ChildContent>
+             <ItemRenderer>
+                 <div class="rounded m-3 bg-white" style="max-width: 12rem; max-height: 20rem;">
+                     <div class="d-flex justify-content-center p-3">
+                         <img class="rounded-circle mx-auto mt-4 img-fluid" src="@context.ImgPath" />
+                     </div>
+                     <div>
+                         <p class="text-center">
+                             @context.FirstName @context.LastName
+                         </p>
+                         <p class="text-center">
+                             @context.Group.ToString()
+                         </p>
+                     </div>
+                     <div class="text-white rounded-bottom p-2" style="background-color: blue; height: 2rem;">
+                         <p class="text-center">
+                             @context.City
+                         </p>
+                     </div>
+                 </div>
+             </ItemRenderer>
+         </MudDropContainer>
+         <div class="row">
+             <div class="col">
+                 <div class="rounded grey-alpha-background pa-6 mx-auto overflow-auto w-100" style="max-height: 10rem;">
+                     @foreach (var log in _logs)
+                    {
+                        <div class="grey-alpha-background rounded-pill p-3 m-2">
+                            @log.Value
+                        </div>
+                    }
+                </div>
             </div>
         </div>
-    </ItemRenderer>
-</MudDropContainer>
-<div class="rounded grey-alpha-background pa-6 ma-8 overflow-auto" style="max-height: 10rem; ">
-    @foreach (var log in _logs)
-    {
-        <div class="grey-alpha-background rounded-pill p-3 m-2">
-            @log.Value
-        </div>
-    }
+    </div>
 </div>
 
 @code {
     private List<UserClientModel> _users = new()
     {
-        new UserClientModel(){ FirstName = "Adam Kowalski", Group = GroupEnum.NoGroup, City = "Radom", ImgPath = "./images/person1.png" },
-        new UserClientModel(){ FirstName = "Piotr Pitorkowski", Group = GroupEnum.NoGroup, ImgPath = "./images/person1.png", City = "Radom"   },
-        new UserClientModel(){ FirstName = "Magda Nowakowska", Group = GroupEnum.NoGroup, ImgPath = "images/person1.png", City = "Radom"   },
-        new UserClientModel(){ FirstName = "Jan Nowak", Group = GroupEnum.Group1, ImgPath = "./images/person1.png", City = "Radom" },
+        new UserClientModel(){ FirstName = "Adam", LastName = "Kowalski", Group = GroupEnum.NoGroup, ImgPath = "./images/person1.png", City = "Radom", },
+        new UserClientModel(){ FirstName = "Piotr", LastName = "Piotrkowski", Group = GroupEnum.NoGroup, ImgPath = "./images/person1.png", City = "Radom"   },
+        new UserClientModel(){ FirstName = "Magda", LastName = "Nowakowska", Group = GroupEnum.NoGroup, ImgPath = "images/person1.png", City = "Radom"   },
+        new UserClientModel(){ FirstName = "Jan", LastName = "Nowak", Group = GroupEnum.Group1, ImgPath = "./images/person1.png", City = "Radom" },
     };
 
     private List<GroupChangeLogClientModel> _logs = new() { };
 
-    private void ItemUpdated(MudItemDropInfo<UserClientModel> dropItem)
+    private void UpdateUserItems(MudItemDropInfo<UserClientModel> dropItem)
     {
         if (dropItem.Item == null)
             return;
@@ -82,20 +93,22 @@
         if (dropItem.Item.Group.ToString() == dropItem.DropzoneIdentifier)
             return;
 
-        Enum.TryParse(dropItem.DropzoneIdentifier, out GroupEnum dropZoneGroupIdentifier);
+        if (!Enum.TryParse(dropItem.DropzoneIdentifier, out GroupEnum dropZoneGroupIdentifier))
+            return;
+
         dropItem.Item.Group = dropZoneGroupIdentifier;
 
         if (dropZoneGroupIdentifier == GroupEnum.NoGroup)
             _logs.Add(new GroupChangeLogClientModel()
-            {
-                Value = $"{dropItem.Item.FirstName} {dropItem.Item.LastName} has been removed from group {oldGroup.ToString()}",
-                Date = DateTime.Now
-            });
-        else 
+                {
+                    Value = $"{dropItem.Item.FirstName} {dropItem.Item.LastName} has been removed from group {oldGroup.ToString()}",
+                    Date = DateTime.Now
+                });
+        else
             _logs.Add(new GroupChangeLogClientModel()
-            {
-                Value = $"{dropItem.Item.FirstName} {dropItem.Item.LastName} has been moved to group {dropItem.DropzoneIdentifier}",
-                Date = DateTime.Now
-            });
+                {
+                    Value = $"{dropItem.Item.FirstName} {dropItem.Item.LastName} has been moved to group {dropItem.DropzoneIdentifier}",
+                    Date = DateTime.Now
+                });
     }
 }
