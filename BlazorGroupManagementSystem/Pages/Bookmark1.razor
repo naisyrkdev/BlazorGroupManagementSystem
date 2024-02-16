@@ -4,16 +4,16 @@
 @using BlazorGroupManagementSystem.Models
 
 <PageTitle>Bookmark1</PageTitle>
-<div class="container">
-    <div class="row">
-        <MudDropContainer T="UserClientModel" Items="_users" ItemsSelector="@((item,dropzone) => item.Group.ToString() == dropzone)" ItemDropped="UpdateUserItems" Class="d-flex flex-grow-1 col-12">
-            <ChildContent>
-                <div class="col-12 col-lg-6 rounded grey-alpha-background pa-6 ma-4 flex-grow-1">
-                    <MudText Typo="Typo.h6" Class="mb-4 text-white">Użytkownicy</MudText>
-                    <MudDropZone AllowReorder T="UserClientModel" Identifier="NoGroup" Class="d-inline-flex flex-wrap w-100 h-100">
-                     </MudDropZone>
-                 </div>
-                 <MudTabs Elevation="1" Rounded="true" ApplyEffectsToContainer="true" Class="col-12 col-lg-6 ma-4" PanelClass="grey-alpha-background w-100 h-100">
+<MudDropContainer T="UserClientModel" Items="_users" ItemsSelector="@((item,dropzone) => item.Group.ToString() == dropzone)" ItemDropped="UpdateUserItems" Class="d-flex flex-grow-1 col-12">
+    <ChildContent>
+        <MudGrid Class="p-3">
+            <MudItem lg="6" md="12" Class="rounded grey-alpha-background">
+                <MudText Typo="Typo.h6" Class="mb-4 text-white">Użytkownicy</MudText>
+                <MudDropZone AllowReorder T="UserClientModel" Identifier="NoGroup" Class="d-inline-flex flex-wrap w-100 h-100">
+                 </MudDropZone>
+             </MudItem>
+             <MudItem lg="6" md="12" Class="rounded grey-alpha-background">
+                 <MudTabs Elevation="1" Rounded="true" ApplyEffectsToContainer="true" PanelClass="w-100 h-100">
                      <MudTabPanel Text="Grupa 1">
                          <MudDropZone AllowReorder T="UserClientModel" Identifier="Group1" Class="w-100 h-100 d-inline-flex flex-wrap pa-6">
                          </MudDropZone>
@@ -35,41 +35,37 @@
                          </MudDropZone>
                      </MudTabPanel>
                  </MudTabs>
-             </ChildContent>
-             <ItemRenderer>
-                 <div class="rounded m-3 bg-white" style="max-width: 12rem; max-height: 20rem;">
-                     <div class="d-flex justify-content-center p-3">
-                         <img class="rounded-circle mx-auto mt-4 img-fluid" src="@context.ImgPath" />
-                     </div>
-                     <div>
-                         <p class="text-center">
-                             @context.FirstName @context.LastName
-                         </p>
-                         <p class="text-center">
-                             @context.Group.ToString()
-                         </p>
-                     </div>
-                     <div class="text-white rounded-bottom p-2" style="background-color: blue; height: 2rem;">
-                         <p class="text-center">
-                             @context.City
-                         </p>
-                     </div>
-                 </div>
-             </ItemRenderer>
-         </MudDropContainer>
-         <div class="row">
-             <div class="col">
-                 <div class="rounded grey-alpha-background pa-6 mx-auto overflow-auto w-100" style="max-height: 10rem;">
-                     @foreach (var log in _logs)
-                    {
-                        <div class="grey-alpha-background rounded-pill p-3 m-2">
-                            @log.Value
-                        </div>
-                    }
-                </div>
-            </div>
+             </MudItem>
+         </MudGrid>
+     </ChildContent>
+     <ItemRenderer>
+         <div class="rounded m-3 bg-white" style="max-width: 12rem; max-height: 20rem;">
+             <div class="d-flex justify-content-center p-3">
+                 <img class="rounded-circle mx-auto mt-4 img-fluid" src="@context.ImgPath" />
+             </div>
+             <div>
+                 <p class="text-center">
+                     @context.FirstName @context.LastName
+                 </p>
+                 <p class="text-center">
+                     @context.Group.ToString()
+                 </p>
+             </div>
+             <div class="text-white rounded-bottom p-2" style="background-color: blue; height: 2rem;">
+                 <p class="text-center">
+                     @context.City
+                 </p>
+             </div>
+         </div>
+     </ItemRenderer>
+ </MudDropContainer>
+ <div class="rounded grey-alpha-background pa-6 mx-auto overflow-auto w-100" style="max-height: 10rem;">
+     @foreach (var log in _logs)
+    {
+        <div class="grey-alpha-background rounded-pill p-3 m-2">
+            @log.Value
         </div>
-    </div>
+    }
 </div>
 
 @code {
